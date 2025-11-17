@@ -1,0 +1,71 @@
+/* HERO */
+.hero-toolbar {
+  --background: linear-gradient(135deg, #004AAD, #007BFF);
+  padding: 40px 0;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.hero-sub {
+  color: #e0e0e0;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+/* CONTENIDO */
+.home-content {
+  --background: #f1f4ff;
+}
+
+.main-card {
+  margin-top: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.main-card ion-button {
+  margin-top: 15px;
+}
+
+/* MODALS */
+.modal-content {
+  padding: 25px;
+  background: #f7f9ff;
+}
+
+.modal-item {
+  margin-bottom: 15px;
+  border-radius: 12px;
+  --background: white;
+  --padding-start: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.modal-btn {
+  margin-top: 20px;
+  border-radius: 25px;
+  font-size: 18px;
+}
+
+/* ICONS */
+ion-icon {
+  color: #004AAD;
+}
+
+.forgot-container {
+  text-align: right;
+  margin: 5px 5px 15px 0;
+}
+
+.forgot-btn {
+  color: #004AAD;
+  font-weight: 600;
+  text-transform: none;
+  font-size: 14px;
+}

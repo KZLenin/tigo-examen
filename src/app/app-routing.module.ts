@@ -24,6 +24,14 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'tabs-asesor',
+    loadChildren: () => import('./pages/tabs-asesor/tabs-asesor.module').then( m => m.TabsAsesorPageModule)
+  },
+  {
+    path: 'tabs-usuario',
+    loadChildren: () => import('./pages/tabs-usuario/tabs-usuario.module').then( m => m.TabsUsuarioPageModule)
+  },
 ];
 
 @NgModule({

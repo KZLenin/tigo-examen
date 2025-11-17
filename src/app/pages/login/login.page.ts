@@ -121,4 +121,21 @@ export class LoginPage {
   continueAsGuest() {
     this.nav.navigateRoot('/home');
   }
+
+  async recoverPassword() {
+  if (!this.emailLogin) {
+    alert('Ingresa tu correo para recuperar la contraseña');
+    return;
+  }
+
+  const { error } = await this.supabase.getSupabase().auth.resetPasswordForEmail(this.emailLogin);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert('Te enviamos un correo con instrucciones para restablecer tu contraseña.');
+}
+
 }

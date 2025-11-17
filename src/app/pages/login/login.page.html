@@ -1,32 +1,39 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
-    <ion-card-header>
-      <ion-card-title color="light">BIENVENIDO A TIGO</ion-card-title>
-      <ion-card-subtitle color="light">Descubre nuestros planes</ion-card-subtitle>
-    </ion-card-header>
+  <ion-toolbar class="hero-toolbar">
+    <div class="hero-content">
+      <h1 class="hero-title">Bienvenido a <strong>TIGO</strong></h1>
+      <p class="hero-sub">Descubre nuestros planes y beneficios</p>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="home-content">
 
-  <!-- BOTONES PRINCIPALES -->
-  <ion-button expand="block" color="primary" size="large" (click)="continueAsGuest()">
-    Explorar como invitado
-  </ion-button>
+  <!-- CARD PRINCIPAL -->
+  <ion-card class="main-card">
+    <ion-card-content>
+      <ion-button expand="block" shape="round" color="primary" size="large" (click)="continueAsGuest()">
+        <ion-icon name="search-outline" slot="start"></ion-icon>
+        Explorar como invitado
+      </ion-button>
 
-  <ion-button expand="block" color="primary" fill="outline" size="large" (click)="openLoginModal()">
-    Iniciar Sesión
-  </ion-button>
+      <ion-button expand="block" shape="round" fill="outline" color="light" size="large" (click)="openLoginModal()">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-text color="medium">Iniciar Sesión</ion-text>
+      </ion-button>
 
-  <ion-button expand="block" color="primary" size="large" (click)="openRegisterModal()">
-    Registrarme
-  </ion-button>
+      <ion-button expand="block" shape="round" color="tertiary" size="large" (click)="openRegisterModal()">
+        <ion-icon name="person-add-outline" slot="start"></ion-icon>
+        Registrarme
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
-  <!-- MODAL LOGIN -->
+  <!-- LOGIN MODAL -->
   <ion-modal #loginModal>
     <ng-template>
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="primary">
           <ion-title>Iniciar Sesión</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="closeLoginModal()">Cerrar</ion-button>
@@ -34,35 +41,39 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-content class="ion-padding">
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="email" [(ngModel)]="emailLogin"></ion-input>
+      <ion-content class="modal-content">
+        <ion-item class="modal-item">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input type="email" placeholder="Correo" [(ngModel)]="emailLogin"></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" [(ngModel)]="passwordLogin"></ion-input>
+        <ion-item class="modal-item">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input type="password" placeholder="Contraseña" [(ngModel)]="passwordLogin"></ion-input>
         </ion-item>
 
-        <ion-button expand="block" color="primary" class="ion-margin-top"
-                    (click)="login()">
+        <ion-button expand="block" class="modal-btn" (click)="login()">
           Entrar como usuario
         </ion-button>
 
-        <ion-button expand="block" color="tertiary" class="ion-margin-top"
-                    (click)="login()">
+        <ion-button expand="block" color="tertiary" class="modal-btn" (click)="login()">
           Entrar como asesor
         </ion-button>
+        <!-- BOTÓN OLVIDÉ MI CONTRASEÑA -->
+        <div class="forgot-container">
+          <ion-button fill="clear" size="small" class="forgot-btn" (click)="recoverPassword()">
+            ¿Olvidaste tu contraseña?
+          </ion-button>
+        </div>
       </ion-content>
     </ng-template>
   </ion-modal>
 
-  <!-- MODAL REGISTRO -->
+  <!-- REGISTER MODAL -->
   <ion-modal #registerModal>
     <ng-template>
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="primary">
           <ion-title>Crear cuenta</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="closeRegisterModal()">Cerrar</ion-button>
@@ -70,31 +81,32 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-content class="ion-padding">
-        <ion-item>
-          <ion-label position="floating">Nombre completo</ion-label>
-          <ion-input type="text" [(ngModel)]="nameRegister"></ion-input>
+      <ion-content class="modal-content">
+
+        <ion-item class="modal-item">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input placeholder="Nombre completo" [(ngModel)]="nameRegister"></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Teléfono</ion-label>
-          <ion-input type="text" [(ngModel)]="phoneRegister"></ion-input>
+        <ion-item class="modal-item">
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-input placeholder="Teléfono" [(ngModel)]="phoneRegister"></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="email" [(ngModel)]="emailRegister"></ion-input>
+        <ion-item class="modal-item">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input type="email" placeholder="Correo" [(ngModel)]="emailRegister"></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" [(ngModel)]="passwordRegister"></ion-input>
+        <ion-item class="modal-item">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input type="password" placeholder="Contraseña" [(ngModel)]="passwordRegister"></ion-input>
         </ion-item>
 
-        <ion-button expand="block" color="primary" class="ion-margin-top"
-                    (click)="register()">
+        <ion-button expand="block" class="modal-btn" (click)="register()">
           Registrarme
         </ion-button>
+
       </ion-content>
     </ng-template>
   </ion-modal>
