@@ -1,0 +1,7 @@
+{
+  "name": "tigo-examen",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
