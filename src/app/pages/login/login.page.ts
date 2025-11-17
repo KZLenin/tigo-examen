@@ -75,7 +75,16 @@ export class LoginPage {
 
     loading.dismiss();
     this.closeLoginModal();
-    this.nav.navigateRoot('/home');
+
+    // REDIRECCIÓN SEGÚN ROL
+    if (perfilData.rol === 'usuario') {
+      this.nav.navigateRoot('/tabs-usuario');
+    } else if (perfilData.rol === 'asesor') {
+      this.nav.navigateRoot('/tabs-asesor');
+    } else {
+      // fallback en caso de rol desconocido
+      this.nav.navigateRoot('/home');
+    }
   }
 
   // ➤ REGISTRO
