@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-card-header>
+      <ion-card-title color="light">BIENVENIDO A TIGO</ion-card-title>
+      <ion-card-subtitle color="light">Descubre nuestros planes</ion-card-subtitle>
+    </ion-card-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- BOTONES PRINCIPALES -->
+  <ion-button expand="block" color="primary" size="large" (click)="continueAsGuest()">
+    Explorar como invitado
+  </ion-button>
+
+  <ion-button expand="block" color="primary" fill="outline" size="large" (click)="openLoginModal()">
+    Iniciar Sesión
+  </ion-button>
+
+  <ion-button expand="block" color="primary" size="large" (click)="openRegisterModal()">
+    Registrarme
+  </ion-button>
+
+  <!-- MODAL LOGIN -->
+  <ion-modal #loginModal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Iniciar Sesión</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeLoginModal()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" [(ngModel)]="emailLogin"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="passwordLogin"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" color="primary" class="ion-margin-top"
+                    (click)="login()">
+          Entrar como usuario
+        </ion-button>
+
+        <ion-button expand="block" color="tertiary" class="ion-margin-top"
+                    (click)="login()">
+          Entrar como asesor
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- MODAL REGISTRO -->
+  <ion-modal #registerModal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Crear cuenta</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeRegisterModal()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-label position="floating">Nombre completo</ion-label>
+          <ion-input type="text" [(ngModel)]="nameRegister"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Teléfono</ion-label>
+          <ion-input type="text" [(ngModel)]="phoneRegister"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" [(ngModel)]="emailRegister"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="passwordRegister"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" color="primary" class="ion-margin-top"
+                    (click)="register()">
+          Registrarme
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>
