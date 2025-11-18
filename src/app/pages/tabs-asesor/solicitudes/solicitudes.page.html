@@ -1,13 +1,29 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>solicitudes</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Solicitudes de Contratación</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">solicitudes</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <ion-spinner *ngIf="cargando"></ion-spinner>
+
+  <ion-list *ngIf="!cargando">
+    <ion-item *ngFor="let s of solicitudes">
+      <ion-label>
+        <h2>{{ s.usuario.nombre }}</h2>
+        <p>Plan: {{ s.plan.nombre_comercial }}</p>
+        <p>Estado: {{ s.estado }}</p>
+      </ion-label>
+
+      <ion-button color="success" (click)="aceptar(s.id)" *ngIf="s.estado === 'pendiente'">
+        Aceptar
+      </ion-button>
+
+      <ion-button color="danger" (click)="rechazar(s.id)" *ngIf="s.estado === 'pendiente'">
+        Rechazar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

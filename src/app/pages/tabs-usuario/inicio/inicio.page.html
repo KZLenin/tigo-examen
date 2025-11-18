@@ -1,13 +1,41 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>inicio</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Planes Disponibles</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">inicio</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <ion-spinner *ngIf="cargando" name="crescent"></ion-spinner>
+
+  <ion-list *ngIf="!cargando">
+    <ion-card *ngFor="let plan of planes">
+
+      <img *ngIf="plan.imagen_url" [src]="plan.imagen_url" />
+
+      <ion-card-header>
+        <ion-card-title>{{ plan.nombre_comercial }}</ion-card-title>
+        <ion-card-subtitle>${{ plan.precio }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{ plan.descripcion }}</p>
+
+        <div class="caracteristicas">
+          <ion-item lines="none" *ngFor="let item of (plan.caracteristicas | keyvalue)">
+            <ion-label>
+              <strong>{{ item.key }}:</strong> {{ item.value }}
+            </ion-label>
+          </ion-item>
+        </div>
+
+        <ion-button expand="block" color="success" (click)="contratar(plan.id)">
+          Contratar Plan
+        </ion-button>
+
+      </ion-card-content>
+
+    </ion-card>
+  </ion-list>
+
 </ion-content>

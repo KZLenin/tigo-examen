@@ -1,13 +1,64 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>chat</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Conversaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">chat</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-spinner *ngIf="cargando"></ion-spinner>
+
+  <ion-list *ngIf="!cargando">
+    <ion-item *ngFor="let s of solicitudesChats" (click)="abrirChat(s)">
+      <ion-label>
+        <h2>Solicitud #{{ s.contratacion?.id ?? s.id }}</h2>
+        <p>Usuario: {{ s.contratacion?.usuario_id ?? 'desconocido' }}</p>
+        <p>Plan ID: {{ s.contratacion?.plan_id }}</p>
+        <p>Estado: {{ s.contratacion?.estado }}</p>
+      </ion-label>
+      <ion-button fill="clear" slot="end" (click)="abrirChat(s)">Abrir</ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<!-- MODAL CHAT -->
+<ion-modal #chatModal>
+  <ng-template>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Chat</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cerrarChat()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding" id="chatContent">
+      <div *ngIf="chatActivo">
+        <h3>Contratación #{{ chatActivo.contratacion_id }}</h3>
+
+        <div *ngIf="otroEscribiendo()" style="font-style: italic; color: gray; margin-bottom:8px;">
+          Alguien está escribiendo...
+        </div>
+
+        <div *ngFor="let m of mensajes" style="margin-bottom:10px;">
+          <div [ngStyle]="{'text-align': m.remitente_id === perfilId ? 'right' : 'left'}">
+            <div style="display:inline-block; padding:8px; border-radius:8px; background:#f1f1f1; max-width:80%;">
+              <small *ngIf="m.remitente_id !== perfilId">{{ m.remitente_id }}</small>
+              <div>{{ m.contenido }}</div>
+              <small style="display:block; opacity:0.6;">{{ m.creado_at | date:'short' }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-content>
+
+    <ion-footer>
+      <ion-toolbar>
+        <ion-item lines="none">
+          <ion-input placeholder="Escribe un mensaje..." [(ngModel)]="nuevoMensaje" (ionInput)="onTyping()" (keyup.enter)="enviar()"></ion-input>
+          <ion-button slot="end" (click)="enviar()">Enviar</ion-button>
+        </ion-item>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-template>
+</ion-modal>

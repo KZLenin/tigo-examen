@@ -1,13 +1,43 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>mis-planes</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mis Planes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">mis-planes</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="cargarContrataciones(); $event.target.complete()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="cargando">
+    <ion-spinner class="m-3"></ion-spinner>
+  </ng-container>
+
+  <ion-list *ngIf="!cargando && misContrataciones.length > 0">
+
+    <ion-card *ngFor="let c of misContrataciones">
+      <ion-card-header>
+        <ion-card-title>{{ c.plan.nombre_comercial }}</ion-card-title>
+        <ion-card-subtitle>\${{ c.plan.precio }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Estado:</strong> {{ c.estado }}</p>
+        <p><strong>Fecha:</strong> {{ c.fecha_contratacion | date:'short' }}</p>
+
+        <ion-button expand="block" color="primary">
+          Abrir Chat
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+  <ng-container *ngIf="!cargando && misContrataciones.length === 0">
+    <ion-text color="medium">
+      <p class="ion-text-center m-4">No tienes contrataciones aún.</p>
+    </ion-text>
+  </ng-container>
+
 </ion-content>

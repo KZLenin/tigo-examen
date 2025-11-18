@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SupabaseService } from 'src/app/services/supabase';
 
 @Component({
   selector: 'app-solicitudes',
@@ -8,9 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SolicitudesPage implements OnInit {
 
-  constructor() { }
+   solicitudes: any[] = [];
+  cargando = true;
 
-  ngOnInit() {
+  constructor(private supabase: SupabaseService) {}
+
+  async ngOnInit() {
+    await this.cargarSolicitudes();
   }
 
+  async cargarSolicitudes() {
+    this.cargando = true;
+
+    const { data, error } = await this.supabase.getSolicitudes();
+
+    if (!error) this.solicitudes = data;
+
+    this.cargando = false;
+  }
+
+  async aceptar(id: number) {
+    await this.supabase.actualizarSolicitud(id, 'aprobada');
+    this.cargarSolicitudes();
+  }
+
+  async rechazar(id: number) {
+    await this.supabase.actualizarSolicitud(id, 'rechazada');
+    this.cargarSolicitudes();
+  }
 }

@@ -1,0 +1,18 @@
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.avatar-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 100px;
+  object-fit: cover;
+  border: 3px solid #ccc;
+}
+
+.avatar-placeholder {
+  font-size: 130px;
+  color: #aaa;
+}

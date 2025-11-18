@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SupabaseService } from 'src/app/services/supabase';
 
 @Component({
   selector: 'app-tabs-usuario',
